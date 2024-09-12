@@ -1,0 +1,11 @@
+{
+  "name": "trabalho-final-interdisciplinar",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pedro Henrique Loriato e Katiane Maciel do Nascimento",
+  "license": "ISC",
+  "description": ""
+}
