@@ -20,8 +20,8 @@ function iniciarAplicacao() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const musicas = yield (0, ApiMusica_1.default)(); // Aguarda a resolução da Promise
-            const catalogo = new CatalogoPesquisavel_1.default(musicas); // 
-            const controller = new Controller_1.default(catalogo); // Passa as músicas para o controlador
+            const catalogo = new CatalogoPesquisavel_1.default(musicas); // Inicializa o catalogo com as musicas
+            const controller = new Controller_1.default(catalogo); // Inicializa o controller com o catalogo
             const novaMusica = new Musica_1.default("darkerside", 174);
             controller.cadastrar(novaMusica);
             console.log(controller.pesquisarPorCriterio("dark"));
