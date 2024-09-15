@@ -12,25 +12,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Controller_1 = __importDefault(require("./controller/Controller"));
-const ApiMusica_1 = __importDefault(require("./api/ApiMusica"));
-const CatalogoPesquisavel_1 = __importDefault(require("./models/CatalogoPesquisavel"));
-const Musica_1 = __importDefault(require("./models/Musica"));
-function iniciarAplicacao() {
+const Musica_1 = __importDefault(require("../models/Musica"));
+function fetchDeezerTracks() {
     return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const musicas = yield (0, ApiMusica_1.default)(); // Aguarda a resolução da Promise
-            const catalogo = new CatalogoPesquisavel_1.default(musicas); // 
-            const controller = new Controller_1.default(catalogo); // Passa as músicas para o controlador
-            const novaMusica = new Musica_1.default("darkerside", 174);
-            controller.cadastrar(novaMusica);
-            console.log(controller.pesquisarPorCriterio("dark"));
-        }
-        catch (error) {
-            console.error(error);
-        }
+        return fetch('https://api.deezer.com/album/302127/tracks')
+            .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro na requisição');
+            }
+            return response.json();
+        })
+            .then(data => {
+            // Usa map para transformar cada item da lista em uma instância de Musica
+            const listaMusica = data.data.map((musica) => {
+                const novaMusica = new Musica_1.default(musica.title, musica.duration);
+                return novaMusica;
+            });
+            return listaMusica; // Retorna a lista de Musica
+        })
+            .catch(error => {
+            console.error('Erro:', error);
+            throw error;
+        });
     });
 }
-// Inicia a aplicação
-iniciarAplicacao();
-//# sourceMappingURL=index.js.map
+exports.default = fetchDeezerTracks;
+//# sourceMappingURL=ApiMusica.js.map
