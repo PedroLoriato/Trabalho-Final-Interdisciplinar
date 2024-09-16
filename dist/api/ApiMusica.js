@@ -32,7 +32,7 @@ function fetchDeezerTracks() {
         })
             .catch(error => {
             console.error('Erro:', error);
-            throw error;
+            throw new Error('Não foi possivel realizar a requisição.' + error.message);
         });
     });
 }

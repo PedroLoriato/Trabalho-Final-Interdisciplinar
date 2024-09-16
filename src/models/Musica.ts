@@ -1,6 +1,6 @@
     import IPesquisavel from "./IPesquisavel";
 
-    class Musica implements IPesquisavel {
+    class Musica {
         _nome: string;
         _duracao: number;
 

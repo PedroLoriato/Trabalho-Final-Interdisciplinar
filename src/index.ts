@@ -10,10 +10,11 @@ async function iniciarAplicacao() {
         const controller = new Controller(catalogo); // Inicializa o controller com o catalogo
 
         const novaMusica = new Musica("darkerside",174)
+        novaMusica.toString();
 
         controller.cadastrar(novaMusica);
 
-        console.log(controller.pesquisarPorCriterio("dark"));
+        console.log(controller.pesquisarPorCriterio("dark").toString());
     } catch (error: any) {
         console.error(error);
     }

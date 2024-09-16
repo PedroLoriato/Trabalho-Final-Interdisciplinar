@@ -23,8 +23,9 @@ function iniciarAplicacao() {
             const catalogo = new CatalogoPesquisavel_1.default(musicas); // Inicializa o catalogo com as musicas
             const controller = new Controller_1.default(catalogo); // Inicializa o controller com o catalogo
             const novaMusica = new Musica_1.default("darkerside", 174);
+            novaMusica.toString();
             controller.cadastrar(novaMusica);
-            console.log(controller.pesquisarPorCriterio("dark"));
+            console.log(controller.pesquisarPorCriterio("dark").toString());
         }
         catch (error) {
             console.error(error);
