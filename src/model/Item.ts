@@ -42,7 +42,7 @@ abstract class Item implements IPesquisavel {
     }
 
     public atendeCriterio(criterio: string): boolean {
-        return true;
+        return this._nome.toLowerCase().includes(criterio.toLowerCase()); 
     }
 
     public toString(): string {
