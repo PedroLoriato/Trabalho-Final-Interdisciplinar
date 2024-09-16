@@ -6,8 +6,8 @@ class Musica extends Item {
     constructor(id: number, nome: string, duracao: number, ISRC: string) {
         super(id, nome, duracao);
 
-        if (!ISRC || !/^\d{12}$/.test(ISRC))
-            throw new Error("ISRC inválido. O ISRC deve conter exatamente 12 dígitos.");
+        if (!ISRC || !/^[a-zA-Z0-9]{12}$/.test(ISRC))
+            throw new Error("ISRC inválido. O ISRC deve conter exatamente 12 caracteres alfanuméricos.");
 
         this._ISRC = ISRC;
     }
@@ -17,8 +17,8 @@ class Musica extends Item {
     }
 
     public set ISRC(ISRC: string) {
-        if (!ISRC || !/^\d{12}$/.test(ISRC))
-            throw new Error("ISRC inválido. O ISRC deve conter exatamente 12 dígitos.");
+        if (!ISRC || !/^[a-zA-Z0-9]{12}$/.test(ISRC))
+            throw new Error("ISRC inválido. O ISRC deve conter exatamente 12 caracteres alfanuméricos.");
         this._ISRC = ISRC;
     }
 

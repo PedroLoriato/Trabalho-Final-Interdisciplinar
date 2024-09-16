@@ -7,16 +7,16 @@ const Item_1 = __importDefault(require("./Item"));
 class Musica extends Item_1.default {
     constructor(id, nome, duracao, ISRC) {
         super(id, nome, duracao);
-        if (!ISRC || !/^\d{12}$/.test(ISRC))
-            throw new Error("ISRC inválido. O ISRC deve conter exatamente 12 dígitos.");
+        if (!ISRC || !/^[a-zA-Z0-9]{12}$/.test(ISRC))
+            throw new Error("ISRC inválido. O ISRC deve conter exatamente 12 caracteres alfanuméricos.");
         this._ISRC = ISRC;
     }
     get ISRC() {
         return this._ISRC;
     }
     set ISRC(ISRC) {
-        if (!ISRC || !/^\d{12}$/.test(ISRC))
-            throw new Error("ISRC inválido. O ISRC deve conter exatamente 12 dígitos.");
+        if (!ISRC || !/^[a-zA-Z0-9]{12}$/.test(ISRC))
+            throw new Error("ISRC inválido. O ISRC deve conter exatamente 12 caracteres alfanuméricos.");
         this._ISRC = ISRC;
     }
     toString() {
