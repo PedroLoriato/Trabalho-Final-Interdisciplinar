@@ -3,7 +3,7 @@ import Musica from "./model/Musica"
 
 const vetMusicas = [new Musica (1, "Song 1", 12345, "123456789098"), new Musica (2, "Song 2", 11111, "098765432112")];
 
-const album = new Album(3, "Album 1", 123456, "111111111111", new Date("2023-10-02"), vetMusicas);
+const album = new Album(3, "Album 1", 123456, "111111111111", vetMusicas);
 
 const musica = new Musica (4, "Song 4", 22222, "456789023145");
 

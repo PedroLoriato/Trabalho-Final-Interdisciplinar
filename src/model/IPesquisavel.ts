@@ -1,5 +1,6 @@
 interface IPesquisavel {
-    pesquisarPorCriterio(criterio: string): boolean;
+    atendeCriterio(criterio: string): boolean;
+    toString(): string;
 }
 
 export default IPesquisavel;

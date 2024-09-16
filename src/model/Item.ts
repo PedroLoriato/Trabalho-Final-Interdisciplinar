@@ -41,7 +41,7 @@ abstract class Item implements IPesquisavel {
         this._duracao = duracao;
     }
 
-    public pesquisarPorCriterio(criterio: string): boolean {
+    public atendeCriterio(criterio: string): boolean {
         return true;
     }
 

@@ -5,15 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Item_1 = __importDefault(require("./Item"));
 class Album extends Item_1.default {
-    constructor(id, nome, duracao, UPC, dataLancamento, musicas = []) {
+    constructor(id, nome, duracao, UPC, musicas = []) {
         super(id, nome, duracao);
         this._musicas = [];
         if (!UPC || !/^\d{12}$/.test(UPC))
             throw new Error("UPC inválido. O UPC deve conter exatamente 12 dígitos.");
-        if (!dataLancamento || dataLancamento.getTime() === 0)
-            throw new Error("Data inválida. Digite uma data de lançamento neste formato aaaa-mm-dd");
         this._UPC = UPC;
-        this._dataLancamento = dataLancamento;
         this._musicas = musicas;
     }
     get UPC() {
@@ -23,14 +20,6 @@ class Album extends Item_1.default {
         if (!UPC || !/^\d{12}$/.test(UPC))
             throw new Error("UPC inválido. O UPC deve conter exatamente 12 dígitos.");
         this._UPC = UPC;
-    }
-    get dataLancamento() {
-        return this._dataLancamento;
-    }
-    set dataLancamento(dataLancamento) {
-        if (!dataLancamento || dataLancamento.getTime() === 0)
-            throw new Error("Data inválida. Digite uma data de lançamento neste formato aaaa-mm-dd");
-        this._dataLancamento = dataLancamento;
     }
     get musicas() {
         return this._musicas;
@@ -53,7 +42,7 @@ class Album extends Item_1.default {
         this._musicas = this._musicas.filter((elemento) => elemento.id !== musica.id);
     }
     toString() {
-        return `${super.toString()}\nUPC: ${this._UPC}\nData de lançamento: ${this._dataLancamento.toLocaleDateString("pt-BR")}\nMusicas: \n${this._musicas.map(musica => musica.toString()).join("\n")}\n`;
+        return `${super.toString()}\nUPC: ${this._UPC}\nMusicas: \n${this._musicas.map(musica => musica.toString()).join("\n")}\n`;
     }
 }
 exports.default = Album;

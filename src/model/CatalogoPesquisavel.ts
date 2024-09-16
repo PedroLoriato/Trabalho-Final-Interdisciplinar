@@ -1,6 +1,6 @@
 import IPesquisavel from "./IPesquisavel";
 
-class CatalogoPesquisavel implements IPesquisavel {
+class CatalogoPesquisavel {
     private _itens: IPesquisavel[] = [];
 
     constructor(itens: IPesquisavel[] = []) {
@@ -13,6 +13,15 @@ class CatalogoPesquisavel implements IPesquisavel {
 
     public set itens(itens: IPesquisavel[]) {
         this._itens = itens;
+    }
+
+    public adicionar(item: IPesquisavel): void {
+    }
+
+    public remover(id: number): void {
+    }
+
+    public listar(): void {
     }
 
     public pesquisarPorCriterio(criterio: string): boolean {

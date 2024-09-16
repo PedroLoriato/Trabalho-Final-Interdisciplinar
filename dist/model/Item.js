@@ -31,7 +31,7 @@ class Item {
             throw new Error("Duração inválida. A duração deve ser maior que zero.");
         this._duracao = duracao;
     }
-    pesquisarPorCriterio(criterio) {
+    atendeCriterio(criterio) {
         return true;
     }
     toString() {

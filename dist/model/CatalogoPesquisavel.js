@@ -11,6 +11,12 @@ class CatalogoPesquisavel {
     set itens(itens) {
         this._itens = itens;
     }
+    adicionar(item) {
+    }
+    remover(id) {
+    }
+    listar() {
+    }
     pesquisarPorCriterio(criterio) {
         return true;
     }

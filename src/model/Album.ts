@@ -3,19 +3,15 @@ import Musica from "./Musica";
 
 class Album extends Item {
     private _UPC: string;
-    private _dataLancamento: Date;
     private _musicas: Musica[] = [];
 
-    constructor(id: number, nome: string, duracao: number, UPC: string, dataLancamento: Date, musicas: Musica[] = []) {
+    constructor(id: number, nome: string, duracao: number, UPC: string, musicas: Musica[] = []) {
         super(id, nome, duracao);
 
         if (!UPC || !/^\d{12}$/.test(UPC))
             throw new Error("UPC inválido. O UPC deve conter exatamente 12 dígitos.");
-        if (!dataLancamento || dataLancamento.getTime() === 0)
-            throw new Error("Data inválida. Digite uma data de lançamento neste formato aaaa-mm-dd");
 
         this._UPC = UPC;
-        this._dataLancamento = dataLancamento;
         this._musicas = musicas;
     }
 
@@ -27,16 +23,6 @@ class Album extends Item {
         if (!UPC || !/^\d{12}$/.test(UPC))
             throw new Error("UPC inválido. O UPC deve conter exatamente 12 dígitos.");
         this._UPC = UPC;
-    }
-
-    public get dataLancamento(): Date {
-        return this._dataLancamento;
-    }
-
-    public set dataLancamento(dataLancamento: Date) {
-        if (!dataLancamento || dataLancamento.getTime() === 0)
-            throw new Error("Data inválida. Digite uma data de lançamento neste formato aaaa-mm-dd");
-        this._dataLancamento = dataLancamento;
     }
 
     public get musicas(): Musica[] {
@@ -64,7 +50,7 @@ class Album extends Item {
     }
 
     public toString(): string {
-        return `${super.toString()}\nUPC: ${this._UPC}\nData de lançamento: ${this._dataLancamento.toLocaleDateString("pt-BR")}\nMusicas: \n${this._musicas.map(musica => musica.toString()).join("\n")}\n`;
+        return `${super.toString()}\nUPC: ${this._UPC}\nMusicas: \n${this._musicas.map(musica => musica.toString()).join("\n")}\n`;
     }
 }
 
