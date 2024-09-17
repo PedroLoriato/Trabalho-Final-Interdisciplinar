@@ -8,16 +8,16 @@ const Musica_1 = __importDefault(require("../models/Musica"));
 const CatalogoPesquisavel_1 = __importDefault(require("../models/CatalogoPesquisavel"));
 const ApiService_1 = __importDefault(require("../api/ApiService"));
 class Controller {
-    // O construtor agora é assíncrono
     constructor(catalogo = new CatalogoPesquisavel_1.default()) {
+        this._catalogo = new CatalogoPesquisavel_1.default();
         this._catalogo = catalogo;
     }
-    // Método público para inicializar o catálogo
-    async inicializaCatalogo() {
-        return (0, ApiService_1.default)([232424, 302127, 212131])
+    // Método para carregar os dados da API no catalogo
+    async carregarDadosApiCatalogo() {
+        return (0, ApiService_1.default)([298492162, 600209182])
             .then(albuns => {
             albuns.forEach(item => this._catalogo.adicionar(item));
-            console.log('Catálogo inicializado com sucesso!');
+            console.log('Catálogo carregado com sucesso!');
         })
             .catch(error => {
             throw error;

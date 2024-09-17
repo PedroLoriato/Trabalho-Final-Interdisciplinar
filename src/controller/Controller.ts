@@ -5,19 +5,18 @@ import CatalogoPesquisavel from "../models/CatalogoPesquisavel";
 import fetchDeezerAlbunsMusicas from "../api/ApiService";
 
 class Controller {
-    private _catalogo: CatalogoPesquisavel;
+    private _catalogo: CatalogoPesquisavel = new CatalogoPesquisavel();
 
-    // O construtor agora é assíncrono
     constructor(catalogo: CatalogoPesquisavel = new CatalogoPesquisavel()) {
         this._catalogo = catalogo;
     }
 
-    // Método público para inicializar o catálogo
-    async inicializaCatalogo() {
-        return fetchDeezerAlbunsMusicas([232424, 302127, 212131])
+    // Método para carregar os dados da API no catalogo
+    async carregarDadosApiCatalogo(): Promise<void> {
+        return fetchDeezerAlbunsMusicas([298492162, 600209182])
             .then(albuns => {
                 albuns.forEach(item => this._catalogo.adicionar(item));
-                console.log('Catálogo inicializado com sucesso!');
+                console.log('Catálogo carregado com sucesso!');
             })
             .catch(error => {
                 throw error;

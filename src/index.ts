@@ -12,13 +12,11 @@ async function aplicacao() {
         const novaMusica = new Musica(11, "Oceano", 230, "ISRC12345678");
 
         // Inicialização dos dados da api no catálogo
-        await controller.inicializaCatalogo();
+        await controller.carregarDadosApiCatalogo();
 
         // Listagem com somente os dados da api
         console.log(controller.listar());
 
-        // Busca por um critério de substring no catálogo
-        console.log(controller.pesquisarPorCriterio("Life").toString());
 
         // Cadastramento de novos itens ao catálogo pesquisável
         controller.cadastrar(novoAlbum);
@@ -26,15 +24,18 @@ async function aplicacao() {
 
         // Adicionando uma música cadastrada no catálogo em um albúm
         controller.adicionarMusicaAoAlbum(1, novaMusica);
-        console.log(controller.listar());
 
         // Removendo a música adicionada em um albúm
         controller.removerMusicaDoAlbum(1, 11);
-        console.log(controller.listar());
 
         // Remoção do albúm cadastrado no catálogo
         controller.remover(1);
+
+        // Listagem com os dados atualizados
         console.log(controller.listar());
+
+        // Busca por um critério de substring no catálogo
+        console.log(controller.pesquisarPorCriterio("darker").toString());
     } catch (error: any) {
         console.error("Erro:", error);
     }

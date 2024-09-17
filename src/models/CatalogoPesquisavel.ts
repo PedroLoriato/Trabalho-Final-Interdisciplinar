@@ -42,7 +42,7 @@ class CatalogoPesquisavel {
     }
 
     public pesquisarPorCriterio(criterio: string): IPesquisavel[] {
-        const resultados = this._itens.filter((elemento) => (elemento as Item).atendeCriterio(criterio));
+        const resultados = this._itens.filter((elemento) => elemento.atendeCriterio(criterio));
 
         if (resultados.length === 0) {
             throw new Error(`Nenhum item encontrado para o critério: ${criterio}`);
