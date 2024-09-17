@@ -48,11 +48,12 @@ class Album extends Item {
 
         this._musicas = this._musicas.filter((elemento) => elemento.id !== musica.id);
     }
-
+    
     public toString(): string {
         return (
             `Albúm:\n` +
             `${super.toString()}\n` +
+            `Duração: ${super.duracao} segundos\n` +
             `UPC: ${this._upc}\n` +
             `Músicas:\n` +
             (this._musicas.length === 0 ?

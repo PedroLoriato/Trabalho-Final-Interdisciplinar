@@ -33,7 +33,7 @@ class Controller {
         return this._catalogo.listar();
     }
     // Método para adicionar uma música a um álbum com verificação de duplicidade e existência no catálogo
-    adicionarMusicaAoAlbum(albumId, musica) {
+    adicionarMusicaAlbum(albumId, musica) {
         // Verifica se a música está cadastrada no catálogo
         const musicaCadastrada = this._catalogo.itens.find(item => item instanceof Musica_1.default && item.id === musica.id);
         if (!musicaCadastrada) {
@@ -52,7 +52,7 @@ class Controller {
         album.adicionarMusica(musica);
         console.log(`Música ${musica.nome} adicionada ao álbum ${album.nome}`);
     }
-    removerMusicaDoAlbum(albumId, musicaId) {
+    removerMusicaAlbum(albumId, musicaId) {
         const album = this._catalogo.itens.find(item => item instanceof Album_1.default && item.id === albumId);
         if (!album) {
             throw new Error(`Álbum com ID ${albumId} não encontrado.`);

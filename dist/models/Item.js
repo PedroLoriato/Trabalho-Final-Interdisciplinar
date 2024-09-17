@@ -36,8 +36,7 @@ class Item {
     }
     toString() {
         return (`ID: ${this._id}\n` +
-            `Nome: ${this._nome}\n` +
-            `Duração: ${this._duracao} segundos`);
+            `Nome: ${this._nome}`);
     }
 }
 exports.default = Item;

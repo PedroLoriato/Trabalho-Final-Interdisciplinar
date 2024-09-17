@@ -36,7 +36,7 @@ const getMusicas = async (albumId) => {
     });
 };
 // Função principal para buscar os álbuns e suas músicas
-const fetchDeezerAlbunsMusicas = async (idAlbuns) => {
+const buscarDeezerAlbunsMusicas = async (idAlbuns) => {
     // Mapeia cada ID de álbum para uma promessa que busca o álbum e suas músicas
     const albumPromises = idAlbuns.map(async (id) => {
         try {
@@ -57,5 +57,5 @@ const fetchDeezerAlbunsMusicas = async (idAlbuns) => {
     console.log(`Todos os itens recebidos (álbuns e músicas):`, resultados);
     return resultados.flat(); // Achata o array de arrays
 };
-exports.default = fetchDeezerAlbunsMusicas;
+exports.default = buscarDeezerAlbunsMusicas;
 //# sourceMappingURL=ApiService.js.map

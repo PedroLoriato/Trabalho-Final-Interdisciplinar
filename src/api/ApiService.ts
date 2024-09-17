@@ -46,7 +46,7 @@ const getMusicas = async (albumId: number): Promise<Musica[]> => {
 };
 
 // Função principal para buscar os álbuns e suas músicas
-const fetchDeezerAlbunsMusicas = async (idAlbuns: number[]): Promise<IPesquisavel[]> => {
+const buscarDeezerAlbunsMusicas = async (idAlbuns: number[]): Promise<IPesquisavel[]> => {
     // Mapeia cada ID de álbum para uma promessa que busca o álbum e suas músicas
     const albumPromises = idAlbuns.map(async id => {
         try {
@@ -72,4 +72,4 @@ const fetchDeezerAlbunsMusicas = async (idAlbuns: number[]): Promise<IPesquisave
     return resultados.flat(); // Achata o array de arrays
 };
 
-export default fetchDeezerAlbunsMusicas;
+export default buscarDeezerAlbunsMusicas;

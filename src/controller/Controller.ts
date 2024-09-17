@@ -2,7 +2,7 @@ import Album from "../models/Album";
 import Musica from "../models/Musica";
 import IPesquisavel from "../models/IPesquisavel";
 import CatalogoPesquisavel from "../models/CatalogoPesquisavel";
-import fetchDeezerAlbunsMusicas from "../api/ApiService";
+import buscarDeezerAlbunsMusicas from "../api/ApiService";
 
 class Controller {
     private _catalogo: CatalogoPesquisavel = new CatalogoPesquisavel();
@@ -13,7 +13,7 @@ class Controller {
 
     // Método para carregar os dados da API no catalogo
     async carregarDadosApiCatalogo(): Promise<void> {
-        return fetchDeezerAlbunsMusicas([298492162, 600209182])
+        return buscarDeezerAlbunsMusicas([298492162, 600209182])
             .then(albuns => {
                 albuns.forEach(item => this._catalogo.adicionar(item));
                 console.log('Catálogo carregado com sucesso!');
@@ -36,7 +36,7 @@ class Controller {
     }
     
     // Método para adicionar uma música a um álbum com verificação de duplicidade e existência no catálogo
-    adicionarMusicaAoAlbum(albumId: number, musica: Musica): void {
+    adicionarMusicaAlbum(albumId: number, musica: Musica): void {
         // Verifica se a música está cadastrada no catálogo
         const musicaCadastrada = this._catalogo.itens.find(item => item instanceof Musica && item.id === musica.id) as Musica;
 
@@ -64,7 +64,7 @@ class Controller {
     }
 
 
-    removerMusicaDoAlbum(albumId: number, musicaId: number): void {
+    removerMusicaAlbum(albumId: number, musicaId: number): void {
         const album = this._catalogo.itens.find(item => item instanceof Album && item.id === albumId) as Album;
         if (!album) {
             throw new Error(`Álbum com ID ${albumId} não encontrado.`);

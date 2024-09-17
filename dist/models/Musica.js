@@ -22,6 +22,7 @@ class Musica extends Item_1.default {
     toString() {
         return (`Música:\n` +
             `${super.toString()}\n` +
+            `Duração: ${super.duracao} segundos\n` +
             `ISRC: ${this._isrc}\n`);
     }
 }

@@ -42,6 +42,7 @@ class Album extends Item_1.default {
     toString() {
         return (`Albúm:\n` +
             `${super.toString()}\n` +
+            `Duração: ${super.duracao} segundos\n` +
             `UPC: ${this._upc}\n` +
             `Músicas:\n` +
             (this._musicas.length === 0 ?
