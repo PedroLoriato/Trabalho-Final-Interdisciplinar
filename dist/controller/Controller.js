@@ -1,72 +1,59 @@
-import Album from "../models/Album";
-import Musica from "../models/Musica";
-import IPesquisavel from "../models/IPesquisavel";
-import CatalogoPesquisavel from "../models/CatalogoPesquisavel";
-import fetchDeezerAlbunsMusicas from "../api/ApiService";
-
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const Album_1 = __importDefault(require("../models/Album"));
+const Musica_1 = __importDefault(require("../models/Musica"));
+const CatalogoPesquisavel_1 = __importDefault(require("../models/CatalogoPesquisavel"));
+const ApiService_1 = __importDefault(require("../api/ApiService"));
 class Controller {
-    private _catalogo: CatalogoPesquisavel;
-
     // O construtor agora é assíncrono
-    constructor(catalogo: CatalogoPesquisavel = new CatalogoPesquisavel()) {
+    constructor(catalogo = new CatalogoPesquisavel_1.default()) {
         this._catalogo = catalogo;
     }
-
     // Método público para inicializar o catálogo
     async inicializaCatalogo() {
-        return fetchDeezerAlbunsMusicas([232424, 302127, 212131])
+        return (0, ApiService_1.default)([232424, 302127, 212131])
             .then(albuns => {
-                albuns.forEach(item => this._catalogo.adicionar(item));
-                console.log('Catálogo inicializado com sucesso!');
-            })
+            albuns.forEach(item => this._catalogo.adicionar(item));
+            console.log('Catálogo inicializado com sucesso!');
+        })
             .catch(error => {
-                throw error;
-            });
+            throw error;
+        });
     }
-
-    cadastrar(item: IPesquisavel): void {
+    cadastrar(item) {
         this._catalogo.adicionar(item);
     }
-
-    remover(id: number): void {
+    remover(id) {
         this._catalogo.remover(id);
     }
-
-    listar(): string {
+    listar() {
         return this._catalogo.listar();
     }
-    
     // Método para adicionar uma música a um álbum com verificação de duplicidade e existência no catálogo
-    adicionarMusicaAoAlbum(albumId: number, musica: Musica): void {
+    adicionarMusicaAoAlbum(albumId, musica) {
         // Verifica se a música está cadastrada no catálogo
-        const musicaCadastrada = this._catalogo.itens.find(item => item instanceof Musica && item.id === musica.id) as Musica;
-
+        const musicaCadastrada = this._catalogo.itens.find(item => item instanceof Musica_1.default && item.id === musica.id);
         if (!musicaCadastrada) {
             throw new Error(`A música com ID ${musica.id} não está cadastrada no catálogo. Por favor, cadastre a música ao catálogo antes de adicioná-la a um álbum.`);
         }
-
         // Verifica se a música já está presente em algum outro álbum no catálogo
-        const albumComMusica = this._catalogo.itens.find(item =>
-            item instanceof Album && item.musicas.some(m => m.id === musica.id)
-        ) as Album;
-
+        const albumComMusica = this._catalogo.itens.find(item => item instanceof Album_1.default && item.musicas.some(m => m.id === musica.id));
         if (albumComMusica) {
             throw new Error(`A música com ID ${musica.id} já está presente no álbum "${albumComMusica.nome}". Não é possível adicionar a mesma música em outro álbum.`);
         }
-
         // Caso não esteja, procura o álbum pelo ID e adiciona a música
-        const album = this._catalogo.itens.find(item => item instanceof Album && item.id === albumId) as Album;
+        const album = this._catalogo.itens.find(item => item instanceof Album_1.default && item.id === albumId);
         if (!album) {
             throw new Error(`Álbum com ID ${albumId} não encontrado.`);
         }
-
         album.adicionarMusica(musica);
         console.log(`Música ${musica.nome} adicionada ao álbum ${album.nome}`);
     }
-
-
-    removerMusicaDoAlbum(albumId: number, musicaId: number): void {
-        const album = this._catalogo.itens.find(item => item instanceof Album && item.id === albumId) as Album;
+    removerMusicaDoAlbum(albumId, musicaId) {
+        const album = this._catalogo.itens.find(item => item instanceof Album_1.default && item.id === albumId);
         if (!album) {
             throw new Error(`Álbum com ID ${albumId} não encontrado.`);
         }
@@ -77,10 +64,9 @@ class Controller {
         album.removerMusica(musica);
         console.log(`Música ${musica.nome} removida do álbum ${album.nome}`);
     }
-
-    pesquisarPorCriterio(criterio: string): IPesquisavel[] {
+    pesquisarPorCriterio(criterio) {
         return this._catalogo.pesquisarPorCriterio(criterio);
     }
 }
-
-export default Controller;
+exports.default = Controller;
+//# sourceMappingURL=Controller.js.map

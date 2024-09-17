@@ -1,11 +1,7 @@
-import IPesquisavel from "./IPesquisavel";
-
-abstract class Item implements IPesquisavel {
-    private _id: number;
-    private _nome: string;
-    private _duracao: number;
-
-    constructor(id: number, nome: string, duracao: number) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+class Item {
+    constructor(id, nome, duracao) {
         if (id <= 0)
             throw new Error("ID inválido. O ID deve ser maior que zero.");
         if (!nome || nome.trim() === "")
@@ -16,38 +12,33 @@ abstract class Item implements IPesquisavel {
         this._nome = nome;
         this._duracao = duracao;
     }
-
-    public get id(): number {
+    get id() {
         return this._id;
     }
-
-    public get nome(): string {
+    get nome() {
         return this._nome;
     }
-
-    public get duracao(): number {
+    get duracao() {
         return this._duracao;
     }
-
-    public set nome(nome: string) {
+    set nome(nome) {
         if (!nome || nome.trim() === "")
             throw new Error("Nome inválido. O nome não pode estar vazio.");
         this._nome = nome;
     }
-
-    public set duracao(duracao: number) {
+    set duracao(duracao) {
         if (!duracao || duracao <= 0)
             throw new Error("Duração inválida. A duração deve ser maior que zero.");
         this._duracao = duracao;
     }
-
-    public atendeCriterio(criterio: string): boolean {
-        return this._nome.toLowerCase().includes(criterio.toLowerCase()); 
+    atendeCriterio(criterio) {
+        return this._nome.toLowerCase().includes(criterio.toLowerCase());
     }
-
-    public toString(): string {
-        return `ID: ${this._id}\nNome: ${this._nome}\nDuração: ${this._duracao}`;
+    toString() {
+        return (`ID: ${this._id}\n` +
+            `Nome: ${this._nome}\n` +
+            `Duração: ${this._duracao} segundos`);
     }
 }
-
-export default Item;
+exports.default = Item;
+//# sourceMappingURL=Item.js.map

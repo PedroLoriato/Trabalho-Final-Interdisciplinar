@@ -1,25 +1,44 @@
-import Album from "./model/Album";
-import Musica from "./model/Musica"
+import Controller from "./controller/Controller";
+import Album from "./models/Album";
+import Musica from "./models/Musica";
 
-const vetMusicas = [new Musica (1, "Song 1", 12345, "123456789098"), new Musica (2, "Song 2", 11111, "098765432112")];
+async function aplicacao() {
+    try {
+        // Inicialize o controlador
+        const controller = new Controller();
 
-const album = new Album(3, "Album 1", 123456, "111111111111", vetMusicas);
+        // 
+        const novoAlbum = new Album(1, "Life", 300, "234567890867");
+        const novaMusica = new Musica(11, "Oceano", 230, "ISRC12345678");
 
-const musica = new Musica (4, "Song 4", 22222, "456789023145");
+        // Inicialização dos dados da api no catálogo
+        await controller.inicializaCatalogo();
 
-console.log(vetMusicas.toString());
-console.log(album.toString());
-// vetMusicas.push(new Musica (5, "Song 5", 22222, "123"));
+        // Listagem com somente os dados da api
+        console.log(controller.listar());
 
-album.adicionarMusica(musica);
-console.log(album.toString());
+        // Busca por um critério de substring no catálogo
+        console.log(controller.pesquisarPorCriterio("Life").toString());
 
-album.removerMusica(musica);
-console.log(album.toString());
+        // Cadastramento de novos itens ao catálogo pesquisável
+        controller.cadastrar(novoAlbum);
+        controller.cadastrar(novaMusica);
 
-// album.adicionarMusica(vetMusicas[0]);
-// console.log(album.toString());
+        // Adicionando uma música cadastrada no catálogo em um albúm
+        controller.adicionarMusicaAoAlbum(1, novaMusica);
+        console.log(controller.listar());
 
-// album.removerMusica(musica);
-// console.log(album.toString());
+        // Removendo a música adicionada em um albúm
+        controller.removerMusicaDoAlbum(1, 11);
+        console.log(controller.listar());
 
+        // Remoção do albúm cadastrado no catálogo
+        controller.remover(1);
+        console.log(controller.listar());
+    } catch (error: any) {
+        console.error("Erro:", error);
+    }
+}
+
+// Execute a função da aplicação
+aplicacao();

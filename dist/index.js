@@ -3,20 +3,39 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Album_1 = __importDefault(require("./model/Album"));
-const Musica_1 = __importDefault(require("./model/Musica"));
-const vetMusicas = [new Musica_1.default(1, "Song 1", 12345, "123456789098"), new Musica_1.default(2, "Song 2", 11111, "098765432112")];
-const album = new Album_1.default(3, "Album 1", 123456, "111111111111", vetMusicas);
-const musica = new Musica_1.default(4, "Song 4", 22222, "456789023145");
-console.log(vetMusicas.toString());
-console.log(album.toString());
-// vetMusicas.push(new Musica (5, "Song 5", 22222, "123"));
-album.adicionarMusica(musica);
-console.log(album.toString());
-album.removerMusica(musica);
-console.log(album.toString());
-// album.adicionarMusica(vetMusicas[0]);
-// console.log(album.toString());
-// album.removerMusica(musica);
-// console.log(album.toString());
+const Controller_1 = __importDefault(require("./controller/Controller"));
+const Album_1 = __importDefault(require("./models/Album"));
+const Musica_1 = __importDefault(require("./models/Musica"));
+async function aplicacao() {
+    try {
+        // Inicialize o controlador
+        const controller = new Controller_1.default();
+        // 
+        const novoAlbum = new Album_1.default(1, "Life", 300, "234567890867");
+        const novaMusica = new Musica_1.default(11, "Oceano", 230, "ISRC12345678");
+        // Inicialização dos dados da api no catálogo
+        await controller.inicializaCatalogo();
+        // Listagem com somente os dados da api
+        console.log(controller.listar());
+        // Busca por um critério de substring no catálogo
+        console.log(controller.pesquisarPorCriterio("Life").toString());
+        // Cadastramento de novos itens ao catálogo pesquisável
+        controller.cadastrar(novoAlbum);
+        controller.cadastrar(novaMusica);
+        // Adicionando uma música cadastrada no catálogo em um albúm
+        controller.adicionarMusicaAoAlbum(1, novaMusica);
+        console.log(controller.listar());
+        // Removendo a música adicionada em um albúm
+        controller.removerMusicaDoAlbum(1, 11);
+        console.log(controller.listar());
+        // Remoção do albúm cadastrado no catálogo
+        controller.remover(1);
+        console.log(controller.listar());
+    }
+    catch (error) {
+        console.error("Erro:", error);
+    }
+}
+// Execute a função da aplicação
+aplicacao();
 //# sourceMappingURL=index.js.map
