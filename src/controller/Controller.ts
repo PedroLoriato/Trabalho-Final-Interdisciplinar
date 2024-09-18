@@ -11,32 +11,36 @@ class Controller {
         this._catalogo = catalogo;
     }
 
-    // Método para carregar os dados da API no catalogo
-    async carregarDadosApiCatalogo(): Promise<void> {
-        return buscarDeezerAlbunsMusicas([298492162, 600209182])
-            .then(albuns => {
-                albuns.forEach(item => this._catalogo.adicionar(item));
-                console.log('Catálogo carregado com sucesso!');
-            })
-            .catch(error => {
-                throw error;
-            });
+    public async carregarDadosApiCatalogo(): Promise<void> {
+        try {
+            const albuns = await buscarDeezerAlbunsMusicas([298492162, 600209182]); // Parãmetro com o ID dos albuns a serem carregados
+            albuns.forEach(item => this._catalogo.adicionar(item));
+            console.log('Catálogo carregado com sucesso!');
+        } catch (error) {
+            console.error('Erro ao carregar o catálogo:', error);
+            throw error;
+        }
     }
-
-    cadastrar(item: IPesquisavel): void {
+    
+    public cadastrar(item: IPesquisavel): void {
         this._catalogo.adicionar(item);
     }
 
-    remover(id: number): void {
+    public remover(id: number): void {
         this._catalogo.remover(id);
     }
 
-    listar(): string {
+    public listar(): string;
+    public listar(itensEspecificos: IPesquisavel[]): string;
+    public listar(itensEspecificos?: IPesquisavel[]): string {
+        if (itensEspecificos) {
+            return this._catalogo.listar(itensEspecificos);
+        }
         return this._catalogo.listar();
     }
     
     // Método para adicionar uma música a um álbum com verificação de duplicidade e existência no catálogo
-    adicionarMusicaAlbum(albumId: number, musica: Musica): void {
+    public adicionarMusicaAlbum(albumId: number, musica: Musica): void {
         // Verifica se a música está cadastrada no catálogo
         const musicaCadastrada = this._catalogo.itens.find(item => item instanceof Musica && item.id === musica.id) as Musica;
 
@@ -64,7 +68,7 @@ class Controller {
     }
 
 
-    removerMusicaAlbum(albumId: number, musicaId: number): void {
+    public removerMusicaAlbum(albumId: number, musicaId: number): void {
         const album = this._catalogo.itens.find(item => item instanceof Album && item.id === albumId) as Album;
         if (!album) {
             throw new Error(`Álbum com ID ${albumId} não encontrado.`);
@@ -77,7 +81,7 @@ class Controller {
         console.log(`Música ${musica.nome} removida do álbum ${album.nome}`);
     }
 
-    pesquisarPorCriterio(criterio: string): IPesquisavel[] {
+    public pesquisarPorCriterio(criterio: string): IPesquisavel[] {
         return this._catalogo.pesquisarPorCriterio(criterio);
     }
 }

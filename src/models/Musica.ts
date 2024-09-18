@@ -21,11 +21,14 @@ class Musica extends Item {
         this._isrc = isrc;
     }
 
+    public duracaoEmUnidades(): string {
+        return `${this.duracao} segundos`;
+    }
+
     public toString(): string {
         return (
             `Música:\n` +
             `${super.toString()}\n` + 
-            `Duração: ${super.duracao} segundos\n` +
             `ISRC: ${this._isrc}\n`
         );
     }

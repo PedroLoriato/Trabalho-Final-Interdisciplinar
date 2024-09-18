@@ -12,16 +12,16 @@ class Controller {
         this._catalogo = new CatalogoPesquisavel_1.default();
         this._catalogo = catalogo;
     }
-    // Método para carregar os dados da API no catalogo
     async carregarDadosApiCatalogo() {
-        return (0, ApiService_1.default)([298492162, 600209182])
-            .then(albuns => {
+        try {
+            const albuns = await (0, ApiService_1.default)([298492162, 600209182]); // Parãmetro com o ID dos albuns a serem carregados
             albuns.forEach(item => this._catalogo.adicionar(item));
             console.log('Catálogo carregado com sucesso!');
-        })
-            .catch(error => {
+        }
+        catch (error) {
+            console.error('Erro ao carregar o catálogo:', error);
             throw error;
-        });
+        }
     }
     cadastrar(item) {
         this._catalogo.adicionar(item);
@@ -29,7 +29,10 @@ class Controller {
     remover(id) {
         this._catalogo.remover(id);
     }
-    listar() {
+    listar(itensEspecificos) {
+        if (itensEspecificos) {
+            return this._catalogo.listar(itensEspecificos);
+        }
         return this._catalogo.listar();
     }
     // Método para adicionar uma música a um álbum com verificação de duplicidade e existência no catálogo

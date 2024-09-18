@@ -10,7 +10,7 @@ class Filme extends Item {
         if (!paisOrigem || paisOrigem.trim() === "") 
             throw new Error("O país de origem é inválido. O nome do país de origem não pode estar vazio.");
         if (!/^[a-zA-Z\s]+$/.test(paisOrigem))
-            throw new Error("O País de origem é inválido. O nome do país de origem só pode conter letras.");        
+            throw new Error("O país de origem é inválido. O nome do país de origem só pode conter letras.");        
         this._paisOrigem = paisOrigem;
     }
 
@@ -26,12 +26,15 @@ class Filme extends Item {
         this._paisOrigem = paisOrigem;
     }
 
+    public duracaoEmUnidades(): string {
+        return `${this.duracao} minutos`;
+    }
+
     public toString(): string {
         return (
             `Filme:\n` +
             `${super.toString()}\n` +
-            `Duração: ${super.duracao} minutos\n` +
-            `Páis de Origem: ${this._paisOrigem}\n`
+            `País de Origem: ${this._paisOrigem}\n`
         );
     }
     

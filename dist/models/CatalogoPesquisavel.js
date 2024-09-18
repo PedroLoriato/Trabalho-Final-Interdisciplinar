@@ -25,7 +25,10 @@ class CatalogoPesquisavel {
         this._itens = this._itens.filter((elemento) => elemento.id !== id);
         console.log(`Item com ID ${id} removido com sucesso!`);
     }
-    listar() {
+    listar(itensEspecificos) {
+        if (itensEspecificos) {
+            return (itensEspecificos.map(item => item.toString()).join("\n"));
+        }
         if (this._itens.length === 0)
             throw new Error("Não existe itens no catálogo.");
         return this.toString();
@@ -38,7 +41,7 @@ class CatalogoPesquisavel {
         return resultados;
     }
     toString() {
-        return (this._itens.map(item => item.toString()).join("\n"));
+        return ("\n" + this._itens.map(item => item.toString()).join("\n"));
     }
 }
 exports.default = CatalogoPesquisavel;

@@ -39,10 +39,12 @@ class Album extends Item_1.default {
             throw new Error(`Música com ID ${musica.id} não está presente no albúm. Não foi possível excluir a música do albúm.`);
         this._musicas = this._musicas.filter((elemento) => elemento.id !== musica.id);
     }
+    duracaoEmUnidades() {
+        return `${this.duracao} segundos`;
+    }
     toString() {
         return (`Albúm:\n` +
             `${super.toString()}\n` +
-            `Duração: ${super.duracao} segundos\n` +
             `UPC: ${this._upc}\n` +
             `Músicas:\n` +
             (this._musicas.length === 0 ?

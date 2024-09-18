@@ -19,10 +19,12 @@ class Musica extends Item_1.default {
             throw new Error("ISRC inválido. O ISRC deve conter exatamente 12 caracteres alfanuméricos.");
         this._isrc = isrc;
     }
+    duracaoEmUnidades() {
+        return `${this.duracao} segundos`;
+    }
     toString() {
         return (`Música:\n` +
             `${super.toString()}\n` +
-            `Duração: ${super.duracao} segundos\n` +
             `ISRC: ${this._isrc}\n`);
     }
 }

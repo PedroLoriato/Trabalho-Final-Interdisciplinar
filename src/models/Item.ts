@@ -45,10 +45,14 @@ abstract class Item implements IPesquisavel {
         return this._nome.toLowerCase().includes(criterio.toLowerCase()); 
     }
 
+    // Método abstrato para subclasses definirem a unidade de duração
+    public abstract duracaoEmUnidades(): string;
+
     public toString(): string {
         return (
             `ID: ${this._id}\n` +
-            `Nome: ${this._nome}`
+            `Nome: ${this._nome}\n` +
+            `Duração: ${this.duracaoEmUnidades()}`
         );
     }
 }

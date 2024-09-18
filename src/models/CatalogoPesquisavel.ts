@@ -18,13 +18,13 @@ class CatalogoPesquisavel {
 
     public adicionar(item: IPesquisavel): void {
         const verificarId = this._itens.find(elemento => (elemento as Item).id === (item as Item).id);
-        if (verificarId) 
+        if (verificarId)
             throw new Error(`Item com ID ${(item as Item).id} já existe. Não é possível adicionar um novo item com o mesmo ID.`);
 
         this._itens.push(item);
         console.log(`Item ${(item as Item).nome} adicionado com sucesso!`);
     }
-    
+
     public remover(id: number): void {
         const verificarId = this._itens.find(elemento => (elemento as Item).id === id);
         if (!verificarId)
@@ -34,10 +34,15 @@ class CatalogoPesquisavel {
         console.log(`Item com ID ${id} removido com sucesso!`);
     }
 
-    public listar(): string {
+    public listar(): string;
+    public listar(itensEspecificos: IPesquisavel[]): string;
+    public listar(itensEspecificos?: IPesquisavel[]): string {
+        if (itensEspecificos) {
+            return (itensEspecificos.map(item => item.toString()).join("\n"));
+        }
+
         if (this._itens.length === 0)
             throw new Error("Não existe itens no catálogo.");
-
         return this.toString();
     }
 
@@ -51,7 +56,7 @@ class CatalogoPesquisavel {
     }
 
     public toString(): string {
-        return (this._itens.map(item => item.toString()).join("\n"));
+        return ("\n" + this._itens.map(item => item.toString()).join("\n"));
     }
 }
 

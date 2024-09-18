@@ -34,7 +34,9 @@ async function aplicacao() {
         // Listagem com os dados atualizados
         console.log(controller.listar());
         // Busca por um critério de substring no catálogo
-        console.log(controller.pesquisarPorCriterio("darker").toString());
+        const busca = controller.pesquisarPorCriterio("mr");
+        // Listagem com os dados da busca
+        console.log(controller.listar(busca));
     }
     catch (error) {
         console.error("Erro:", error);

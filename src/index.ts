@@ -42,7 +42,11 @@ async function aplicacao() {
         console.log(controller.listar());
 
         // Busca por um critério de substring no catálogo
-        console.log(controller.pesquisarPorCriterio("darker").toString());
+        const busca = controller.pesquisarPorCriterio("mr");
+
+        // Listagem com os dados da busca
+        console.log(controller.listar(busca));
+        
     } catch (error: any) {
         console.error("Erro:", error);
     }
